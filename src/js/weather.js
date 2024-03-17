@@ -72,12 +72,7 @@ function removeExtraHistoryItems() {
 }
 
 const map = document.querySelector('iframe');
-const city = 'Moscow'; // Пример значения города
-
-button.addEventListener('click', function() {
-    
-});
-
 function success(data) {
     map.src = `https://www.openstreetmap.org/export/embed.html?bbox=${data.coord.lon}%2C${data.coord.lat}&amp;layer=mapnik`;
 }
+
