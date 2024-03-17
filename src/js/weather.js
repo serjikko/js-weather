@@ -7,7 +7,6 @@ const bl_history = document.querySelector('.histoty-list');
 form.onsubmit = function (event) {
     event.preventDefault();
     const city = formCity.value.trim();
-    // console.log(city);
 
     getWeather(city)
     .then((data) => {
@@ -19,6 +18,7 @@ form.onsubmit = function (event) {
             createWeatherCard(data);
             addToHistory(data.name);
             removeExtraHistoryItems();
+            success(data);
         }
     });
 };
@@ -54,26 +54,13 @@ function createWeatherCard(data) {
 }
 
 function addToHistory(city) {
-    const html_history = `
-     <li>${city}</li>
-    `;
-    bl_history.insertAdjacentHTML('afterbegin', html_history);
+    if (!bl_history.innerHTML.includes(city)) {
+        const html_history = `
+            <li>${city}</li>
+        `;
+        bl_history.insertAdjacentHTML('afterbegin', html_history);
+    }
 }
-
-
-// function addToHistory(city) {
-//     const html_history = `
-//      <li><a class='history_link'>${city}</a></li>
-//     `;
-//     bl_history.insertAdjacentHTML('afterbegin', html_history);
-//     const newElement = bl_history.querySelector('.history_link');
-//     newElement.addEventListener('click', myFunction);
-//     getWeather(city);
-//     removeExtraHistoryItems()
-// }
-
-
-
 
 function removeExtraHistoryItems() {
     const items = document.querySelectorAll('li');
@@ -82,4 +69,15 @@ function removeExtraHistoryItems() {
             items[i].remove();
         }
     }
+}
+
+const map = document.querySelector('iframe');
+const city = 'Moscow'; // Пример значения города
+
+button.addEventListener('click', function() {
+    
+});
+
+function success(data) {
+    map.src = `https://www.openstreetmap.org/export/embed.html?bbox=${data.coord.lon}%2C${data.coord.lat}&amp;layer=mapnik`;
 }
