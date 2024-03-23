@@ -89,6 +89,7 @@ document.getElementById("history-list").addEventListener("click", function(event
             removeWeatherCard();
             createWeatherCard(data);
             console.log(city)
+            success(data);
         });
     }
 });
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const status = document.getElementById('status');
 
         if (!navigator.geolocation) {
-            status.textContent = 'Ваш браузер не дружит с геолокацией...';
+            status.textContent = 'Приложение не может определить местоположение';
         } else {
             navigator.geolocation.getCurrentPosition(success, error);
         }
